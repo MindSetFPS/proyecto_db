@@ -22,5 +22,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
-              cd /home/ubuntu && mkdir hello_gha
+              export DB_USER=${{ secrets.DB_USER }} && export DB_HOST=${{ secrets.DB_HOST }} && export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_PORT=${{ secrets.DB_PORT }}
               '
