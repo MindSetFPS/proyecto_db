@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-4xl font-semibold my-4 ml-4">Tu Carrito de Compras</h1>
+  <div class="md:flex w-full mt-8">
+    <div class="md:w-8/12 md:mx-6 mb-48 px-2" id="product-list">
+      {% for product in products %}
+        <div class="my-4 py-2 flex">
+          <img class="h-20 w-20 object-contain" src="{{ product.image_url }}" alt="" />
+          <div class="grid grid-cols-2 md:grid-cols-6 justify-between w-full">
+            <a href="{% url 'product' product.id %}" class="col-span-2 md:col-span-4 font-bold line-clamp-3 text-xs md:text-base leading-3 hover:underline">{{ product.name }}</a>
+
+            <div class=" text-center">${{ product.price|floatformat:'2g' }}</div>
+
+            <div class=" flex flex-col items-end">
+              <p>${{ product.total|floatformat:'2g' }}</p>
+
+              <div class="flex">
+                <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                  {% csrf_token %}
+                  <button class="bg-gray-100 px-2 rounded-l-lg hover:bg-gray-300 transition ring-1 ring-gray-500">+</button>
+                </form>
+                <div class="bg-white px-2 hover:bg-gray-300 transition ring-1 ring-gray-500">{{ product.amount }}</div>
+                <form action="{% url 'decrease_cart_product' product.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="bg-gray-100 px-2 rounded-r-lg hover:bg-gray-300 transition ring-1 ring-gray-500">-</button>
+                </form>
+              </div>
+
+              <form action="{% url 'remove_product_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button class="text-blue-600 hover:text-blue-800 hover:underline">Eliminar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-4xl">No hay productos en tu carrito.</p>
+        <difv class="mt-4">
+          {% if not user.is_authenticated %}
+            <a class="text-2xl rounded-md bg-blue-500 py-2 px-5 text-white hover:bg-blue-400 transition" href="">Iniciar sesión</a>
+          {% endif %}
+          <a class="text-2xl rounded-md bg-gray-100 py-2 px-5 hover:bg-gray-50 transition" href="">Ver más productos</a>
+        </difv>
+      {% endfor %}
+    </div>
+
+    {% if products %}
+      <div class="fixed md:static bottom-0 bg-gray-50 md:rounded-lg p-4 w-screen md:w-4/12 h-fit">
+        <div class="flex justify-between">
+          <p>{{ item_count }} articulos:</p>
+          <p>${{ total_price|floatformat:'2g' }}</p>
+        </div>
+
+        <div class="flex justify-between">
+          <p>envío:</p>
+          <p>$199.00</p>
+        </div>
+
+        <div class="flex justify-between border-t-2 my-2 pt-2">
+          <strong>Total :</strong>
+          <strong>${{ total_price|add:199|floatformat:'2g' }}</strong>
+        </div>
+        <div>
+          <a href="{% url 'buy_cart' %}"><button class="w-full rounded-md bg-green-500 p-2 text-white font-semibold hover:bg-green-700 transition">Finalizar compra</button></a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

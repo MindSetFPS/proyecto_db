@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1 class="text-5xl font-bold">Perfil</h1>
+    <div> Correo: {{ profile.email }} </div>
+    <div> Nombre: {{ profile.name }} </div>
+    <div> Usuario: {{ profile.username }} </div>
+    <div> Apellido: {{ profile.lastname}} </div>
+    
+</div>
+{% endblock %}

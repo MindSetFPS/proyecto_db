@@ -1,0 +1,7 @@
+SQL/
+*.db
+*.sql
+*.sqlite3
+env/
+*.md
+*.pdf

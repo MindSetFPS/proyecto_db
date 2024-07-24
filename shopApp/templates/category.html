@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div>
+    {% include 'components/title.html' with text=category %}
+    <div class="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 px-2">
+      {% for product in products %}
+        {% include 'components/product.html' %}
+        {% comment %} {{ product.name }} {% endcomment %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

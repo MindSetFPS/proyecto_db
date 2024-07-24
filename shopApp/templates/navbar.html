@@ -1,0 +1,59 @@
+<div x-data="{ open: false }">
+
+  <nav class="flex justify-evenly bg-gray-100 text-blue-600 ">
+    <a class="hover:underline flex flex-col items-center" href="{% url 'index' %}">
+      <div>
+        {% include "icons/home.html" %}
+      </div>
+      <p>inicio</p>
+    </a>
+    
+    {% if user.is_authenticated %}
+    <a class="hover:underline flex flex-col items-center" href="{% url 'profile' %}">
+      <div>
+        {% include "icons/user.html" %}
+      </div>
+      <p>perfil</p>
+    </a>
+    <a class="hover:underline flex flex-col items-center" href="{% url 'logout' %}" > 
+      <div>
+        {% include "icons/exit.html" %}
+      </div>
+      <p>Salir</p>
+    </a>
+    {% endif %}
+    
+      <button class="hover:underline" @mouseover.debounce="open = true" @click="open = ! open" >Productos</button>
+
+    {% if not user.is_authenticated %}
+    <a class="hover:underline" href="{% url 'login' %}">Iniciar sesion</a>
+    {% comment %} <a class="hover:underline" href="{% url 'register' %}">Registrarte</a> {% endcomment %}
+    {% endif %}
+    
+    <a class="hover:underline flex flex-col items-center" href="{% url 'view_cart' %}">
+      <div>
+        {% include "cart_icon.html" %}
+      </div>
+      <p>
+        carrito
+      </p>
+    </a>
+  </nav>
+  
+   <div 
+    class="text-blue-600 absolute z-10 bg-gray-200 w-screen h-[50vh]" 
+    @mouseover.away="open = false"
+    x-show="open" 
+    x-transition
+  >
+  {% for category in categories %}
+    <div class="hover:underline">
+      <a href="{% url 'category' category.name %}">
+        {{ category.name }} 
+      </a>
+    </div> 
+  
+  {% endfor %}
+  </div> 
+
+</div>
