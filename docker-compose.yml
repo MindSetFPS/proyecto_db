@@ -5,6 +5,11 @@ services:
     build: .
     ports:
       - "80:8000"
+    environment:
+      - DB_PASSWORD
+      - DB_HOST
+      - DB_USER
+      - DB_PORT
     # depends_on:
       # - db
       
