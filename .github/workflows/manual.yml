@@ -22,6 +22,12 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
-              export DB_USER=${{ secrets.DB_USER }} && export DB_HOST=${{ secrets.DB_HOST }} && export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_PORT=${{ secrets.DB_PORT }}
+              export DB_PORT=5432 && export DB_USER=${{ secrets.DB_USER }} && export DB_HOST=${{ secrets.DB_HOST }} && export DB_PASSWORD=${{ secrets.DB_PASSWORD }} && export DB_PORT=${{ secrets.DB_PORT }}
               env > variables.txt
+              cd /home/proyecto_db
+              git pull
+              pip install -r requirements.txt
+              python manage.py makemigrations
+              python manage.py migrate
+              gunicorn shop.wsgi:application --bind 0.0.0.0:8000
               '

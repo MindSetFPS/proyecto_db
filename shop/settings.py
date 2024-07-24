@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x_h14mr^4&fqv!#8tu#ljk)vb(jw(d9yfw_9eyov((#7kh2_@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '192.168.1.140']
-
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -80,26 +81,48 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+# }
 
 # settings.py
-""" DATABASES = {
-    "default": {
-        "ENGINE": "mssql",
-        "NAME": "master",
-        "USER": "sa",
-        "PASSWORD": "r00t.R00T",
-        "HOST": "localhost",
-        "PORT": "1433",
-        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
-        },
-    },
-} """
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "mssql",
+#         "NAME": "master",
+#         "USER": "sa",
+#         "PASSWORD": "r00t.R00T",
+#         "HOST": "localhost",
+#         "PORT": "1433",
+#         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+#         },
+#     },
+# } 
+
+print(os.getenv('DB_USER'))
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'online-shop',
+
+        'USER': os.getenv('DB_USER'),
+
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+
+        'HOST': os.getenv('DB_HOST'),
+
+        'PORT': os.getenv('DB_PORT'),
+
+    }
+
+}
 
 
 # Password validation

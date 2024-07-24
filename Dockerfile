@@ -1,6 +1,8 @@
 # Use an official Python image as the base
 FROM python:3.12-slim
 
+RUN apt update -y
+RUN apt install postgresql-devel -y
 # Set the working directory to /app
 WORKDIR /app
 
