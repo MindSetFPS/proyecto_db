@@ -26,8 +26,6 @@ jobs:
               env > variables.txt
               cd /home/proyecto_db
               git pull
-              pip install -r requirements.txt
-              python3 manage.py makemigrations
-              python3 manage.py migrate
-              gunicorn shop.wsgi:application --bind 0.0.0.0:8000
+              sudo docker build -t proyecto_db:latest .
+              sudo docker run -p 80:8000 -d proyecto_db:latest
               '
