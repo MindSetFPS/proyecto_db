@@ -26,6 +26,6 @@ jobs:
               env > variables.txt
               cd /home/proyecto_db
               git pull
-              sudo docker build -t proyecto_db:latest .
-              sudo docker run -p 80:8000 -d proyecto_db:latest
+              docker compose down
+              docker compose up -d
               '
