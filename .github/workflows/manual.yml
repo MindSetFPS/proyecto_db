@@ -27,7 +27,7 @@ jobs:
               cd /home/proyecto_db
               git pull
               pip install -r requirements.txt
-              python manage.py makemigrations
-              python manage.py migrate
+              python3 manage.py makemigrations
+              python3 manage.py migrate
               gunicorn shop.wsgi:application --bind 0.0.0.0:8000
               '
