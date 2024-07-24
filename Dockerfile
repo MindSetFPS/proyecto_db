@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 RUN apt update -y
-RUN apt install postgresql-devel -y
+RUN apt install libpq-dev postgresql postgresql-contrib -y
 # Set the working directory to /app
 WORKDIR /app
 
