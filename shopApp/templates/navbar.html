@@ -36,7 +36,7 @@ x-init="$nextTick(() => {
       </p>
     </a>
   
-    {% include "components/navbarItem.html" with text="Productos" items_list=categories login_required=False %}
-    {% include "components/navbarItem.html" with text="User"      items_list=links %}
+    {% include "components/navbarItem.html" with text="Productos" items_list=categories login_required=False icon="shop.html" %}
+    {% include "components/navbarItem.html" with text="User"      items_list=links                           icon="user.html" %}
   </nav>
 </div>
