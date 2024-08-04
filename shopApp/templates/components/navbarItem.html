@@ -1,0 +1,13 @@
+<div 
+    x-data="{ dropdownOpen: true }"
+    class="flex flex-col items-center" 
+    href="{% url 'profile' %}"
+    @mouseover.debounce="dropdownOpen = true" @click="dropdownOpen = ! dropdownOpen"
+>
+  <div>
+    {% include 'icons/user.html' %}
+    <p>{{ text }}</p>
+  </div>
+
+    {% include "components/dropdown.html" with items=items_list login_required=login_required %}
+</div>

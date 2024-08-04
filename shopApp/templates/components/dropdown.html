@@ -1,0 +1,59 @@
+<div 
+    x-init="$nextTick(() => {
+        // Computed properties must be declared in the $nextTick callback, otherwise they won't be available in the template
+        var navbar = document.getElementById('navbar')
+        navbarHeight = navbar.offsetHeight + 'px';
+    });"
+    x-data="{
+        navbarHeight: '',
+    }"
+    id="dropdown"
+    class="
+        absolute 
+        text-blue-600 
+        h-full md:h-max 
+        bg-white 
+        shadow-lg
+        py-48 
+        md:p-2 
+        w-full md:w-auto 
+        rounded-lg z-20" 
+    @mouseover.away="dropdownOpen = false"
+    x-show="dropdownOpen" 
+    x-transition
+    comment="Computed properties belong to :class"
+    :class="`h-[calc(100dvh-${navbarHeight})] top-[${navbarHeight}]`">
+    <div class="flex flex-col justify-evenly md:w-64 h-full"  >
+        {% for item in items %}
+            {% if item.loggedin_required and request.user.is_authenticated %}
+                {% if item.url %}
+                    <a href="{% url item.url %}" class="hover:underline flex  p-2 rounded-lg text-center my-1" >
+                {% else %}
+                    <a href="{% url 'category' item.name %}" class="hover:underline flex  p-2 rounded-lg text-center my-1" >
+                {% endif %}
+
+                {% if item.icon %}
+                        {% include item.icon %}
+                {% endif %}
+                {{ item.name }}
+                </a> 
+            {% endif %}
+            {% comment %} {% if login_required is False or item.loggedin_required is False or None and request.user.is_authenticated is True or None %} {% endcomment %}
+
+            {% if  login_required is False or request.user.is_authenticated is False and item.loggedin_required is False %}
+                {% if item.url %}
+                    <a href="{% url item.url %}" class="hover:underline flex  p-2 rounded-lg text-center my-1" >
+                {% else %}
+                    <a href="{% url 'category' item.name %}" class="hover:underline flex  p-2 rounded-lg text-center my-1" >
+                {% endif %}
+
+                {% if item.icon %}
+                        {% include item.icon %}
+                {% endif %}
+                {{ item.name }}
+                </a>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
