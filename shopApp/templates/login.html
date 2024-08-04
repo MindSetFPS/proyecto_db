@@ -2,14 +2,13 @@
 
 {% block content %}
 
-<div class="shadow-lg rounded-lg p-4 mt-12">
-    <h1 class="text-7xl font-bold">Login</h1>
+<div class="p-4 mt-12">
+    <h1 class="text-5xl md:text-7xl font-bold">Login</h1>
     <form method="post">
-        
         {% csrf_token %}
         {{ form.as_p}}
-        <button class="bg-gray-100 rounded-md p-2 w-32 hover:bg-gray-300 transition w-full" type="submit"> Login </button>
-        
+        <button class="bg-gray-100 rounded-md p-2 w-full md:w-32 hover:bg-gray-300 transition w-full" type="submit"> Login </button>
+        <a href="{% url 'register' %}" class="text-gray-500 text-sm font-bold hover:underline">No tienes cuenta? Registrate </a>
     </form>
 </div>
 

@@ -27,19 +27,16 @@ def my_custom_viewer(request):
     }
     return render(request, 'admin/my_custom_template.html', context)
 
-
 def index(request):
     # Get products
     product_list = Product.objects.filter(stock__gt=0)
     
     # Get products images
-    
     for product in product_list:
         image = Image.objects.filter(product=product).first()
         print(image)
         product.image_url = image.url
     return render(request, 'home.html', {'productos': product_list})
-
 
 def product(request, product_id):
     try:
@@ -63,7 +60,7 @@ def profile(request):
 
         return render(request, 'profile.html', {'profile': user_data})
     # r:eturn HttpResponse(request.session.session_key)
-    return render(request, 'profile.html')
+    return redirect('login')
 
 def register(request: HttpRequest):
     if request.method == 'POST':
