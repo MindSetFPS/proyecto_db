@@ -1,12 +1,9 @@
 <div 
     x-init="$nextTick(() => {
         // Computed properties must be declared in the $nextTick callback, otherwise they won't be available in the template
-        var navbar = document.getElementById('navbar')
-        navbarHeight = navbar.offsetHeight + 'px';
+        // var navbar = document.getElementById('navbar')
+        // navbarHeight = navbar.offsetHeight + 'px';
     });"
-    x-data="{
-        navbarHeight: '',
-    }"
     id="dropdown"
     class="
         absolute 
@@ -18,7 +15,7 @@
         left-0 md:left-auto
         md:p-2 
         w-full md:w-auto 
-backdrop-blur-md bg-white/70
+        backdrop-blur-md bg-white/70
         rounded-lg z-20" 
     @mouseover.away="dropdownOpen = false"
     x-show="dropdownOpen" 

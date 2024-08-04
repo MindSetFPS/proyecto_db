@@ -12,16 +12,23 @@
     <title>Online Shop</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <div class="container mx-auto md:px-64">
-
-        {% block content %}
-        
-        {% endblock %}
+    <div 
+        class="container mx-auto md:px-64" 
+        x-bind:class="`h-[calc(100dvh-${navbarHeight})] mt-[${navbarHeight}]`" 
+        x-data="{
+               navbarHeight: '',
+            }" 
+        x-init="$nextTick(() => {
+            // Computed properties must be declared in the $nextTick callback, otherwise they won't be available in the template
+            var navbar = document.getElementById('navbar')
+            navbarHeight = navbar.offsetHeight + 'px';
+        });"
+    >
+        <div>
+            {% include 'navbar.html' %}
+            {% block content %}{% endblock %}
+        </div>
     </div>
-    
-    {% block javascript %}
-    
-    {% endblock javascript %}
+    {% block javascript %}{% endblock javascript %}
 </body>
 </html>

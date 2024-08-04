@@ -3,7 +3,6 @@
   open: false,
   dropdownStyleLeft: '',
   dropdownHeightMobile: '',
-  navbarHeight: '',
 }"
 
 x-init="$nextTick(() => {
@@ -19,7 +18,7 @@ x-init="$nextTick(() => {
     dropdownHeightMobile = (window.innerHeight - navbar.offsetHeight ) + 'px';
 });"
 >
-  <nav id="navbar" class="flex justify-evenly bg-gray-100 text-blue-600 ">
+  <nav id="navbar" class="flex fixed top-0 left-0 w-screen z-50 justify-evenly bg-white text-blue-600 ">
     <a class="hover:underline flex flex-col items-center" href="{% url 'index' %}">
       <div>
         {% include "icons/home.html" %}
