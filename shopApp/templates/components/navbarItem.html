@@ -2,7 +2,9 @@
     x-data="{ dropdownOpen: false }"
     class="flex flex-col items-center text-sm text-blue-600" 
     href="{% url 'profile' %}"
-    @mouseover.debounce="dropdownOpen = true" @click="dropdownOpen = ! dropdownOpen"
+    @mouseenter.debounce="dropdownOpen = true"
+    @mouseleave.debounce.500="dropdownOpen = false"
+    @click="dropdownOpen = !dropdownOpen"
 >
     {% include "icons/"|add:icon %}
     <p>{{ text }}</p>
