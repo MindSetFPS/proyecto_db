@@ -7,38 +7,36 @@
     {% endfor %}
   </div>
 
-  <div class="bg-gray-200 p-4">
-    <div class="md:flex">
-      <div class="md:w-5/12 relative">
-        <button onclick="prevButton()" id="prevButton" class="z-10 w-8 h-8 p-2 flex flex-col ml-2 bg-white/50 rounded-full absolute left-0 top-1/2 ">
-          {% include "icons/arrow-left.html" with class="" %}
-        </button>
-        <button onclick="nextButton()" id="nextButton" class="z-10 w-8 h-8 p-2 flex flex-col mr-2 bg-white/50 rounded-full absolute right-0 top-1/2">
-          {% include "icons/arrow-right.html" with class="" %}
-        </button>
-        <div id="image-list" class="snap-x scroll-smooth overflow-x-auto flex w-full">
-          {% for image in images %}
-            <img class="snap-center transition transform" src="{{ image.url }}" alt="" />
-          {% endfor %}
-        </div>
-      </div>
-      <!-- TODO: Make a position indicator -->
-      {% for image in images %}
-      {% endfor %}
-      <div class="md:px-4 md:w-7/12">
-        <h1 class="md:text-2xl">{{ product.name }}</h1>
-        <div>
-          <div class="mb-6">
-            <div class="font-semibold text-2xl">${{ product.price }}</div>Hasta 18 MSI<div class="text-gray-500">unidades:
-              {{ product.stock }}</div>
-          </div>
-          <div>Calcular fecha de entrega</div>
-          <div>Envío: $139.00</div>
-          <button type="submit" class="bg-blue-400 p-4 rounded-lg text-white font-semibold w-full hover:bg-blue-300 transition">Comprar</button>
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+
+   <div id="image-carrosel" class="aspect-square relative col-span-12 md:col-span-6 overflow-hidden">
+      <button onclick="prevButton()" id="prevButton" class="z-10 w-8 h-8 p-2 flex flex-col ml-6 bg-white/50 rounded-full absolute left-0 top-1/2">{% include 'icons/arrow-left.html' with class='' %}</button>
+      <button onclick="nextButton()" id="nextButton" class="z-10 w-8 h-8 p-2 flex flex-col mr-6 bg-white/50 rounded-full absolute right-0 top-1/2">{% include 'icons/arrow-right.html' with class='' %}</button>
+      <div id="image-list" class="pl-4 py-4 mr-2 rounded-xl snap-x scroll-smooth overflow-auto flex shrink-0 sm: md: lg: xl: 2xl h-full w-full">
+        {% for image in images %}
+          <img class="mr-4 object-cover shrink-0 aspect-square rounded-xl h-full w-auto snap-center transition transform" src="{{ image.url }}" alt="" />
+        {% endfor %}
       </div>
     </div>
-    <div class="md:px-24">{{ product.description|safe }}</div>
+    <!-- TODO: Make a position indicator -->
+
+    <div id="product-buy" class="md:pr-4 ml-2 px-4 md:pt-4 md:px-0 col-span-12 md:col-span-6 ">
+      <h1 class="md:text-2xl">{{ product.name }}</h1>
+      <div>
+        <div class="mb-6">
+          <div class="font-semibold text-2xl">${{ product.price }}</div>Hasta 18 MSI<div class="text-gray-500">unidades:
+            {{ product.stock }}</div>
+        </div>
+        <div>Calcular fecha de entrega</div>
+        <div>Envío: $139.00</div>
+        <form action="{% url 'add_to_cart' product.id %}" method="post">
+          {% csrf_token %}
+          {% include 'components/button.html' with color='blue' type='submit' %}
+        </form>
+      </div>
+    </div>
+
+    <div class="md:col-span-12 p-4">{{ product.description|safe }}</div>
   </div>
 {% endblock %}
 
