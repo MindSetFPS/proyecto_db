@@ -244,4 +244,9 @@ def category(request, category):
     else:
         cat = Category.objects.filter(name=category).first()
         products = Product.objects.filter(category=cat.id)
+        
+        for product in products:
+            image = Image.objects.filter(product=product).first()
+            product.image_url = image.url
+
         return render(request, 'category.html', {'products': products, 'category': cat.name})
