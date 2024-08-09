@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="p-2 bg-gray-100/50">
+    {% include 'components/title.html' with category='Pedido' %}
+
+    <div class="flex justify-between">
+      <div class="text-sm">Fecha de entrega: {{ order.date }}</div>
+      <div class="text-sm">Ayuda con la compra</div>
+    </div>
+
+    <div class="md:flex bg-white rounded-xl p-2 border border-gray-400">
+      <div class="w-full">
+        <div class="font-semibold">Direccion de entrega:</div>
+        <div>{{ customer.address }}</div>
+      </div>
+      <div class="w-full font-semibold">Metodo de pago</div>
+      <div class="w-full">
+        <div class="font-semibold">Detalle de la compra(dinero)</div>
+        <div>${{ order.total }}</div>
+      </div>
+    </div>
+
+    <div class="rounded-xl bg-white p-2 mt-2 border border-gray-400 ">
+      {% for product in products %}
+        <div class="grid grid-cols-10 lg:grid-cols-12 lg:gap-x-2 my-2 justify-between">
+          <div class="col-span-2 lg:col-span-2">
+            {% include 'components/img.html' with image_url=product.image.url %}
+          </div>
+          <div class="text-sm col-span-6 lg:col-span-8">{{ product.product.name }}</div>
+          <div class="text-sm col-span-2">${{ product.product.price }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
