@@ -3,13 +3,15 @@
     class="
         bg-{{ color }}-500 
         hover:bg-{{ color }}-400 
-        p-4 
+        p-2
         rounded-lg 
         text-white 
         font-semibold 
-        w-full 
+        w-{{ width }}
         transition
+        text-{% firstof text_size "md" %}
+        {{ class }}
     "
 >
-    Comprar
+   {{ text }}
 </button>

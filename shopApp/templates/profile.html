@@ -1,12 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+  <div class="px-2">
     <h1 class="text-5xl font-bold">Perfil</h1>
-    <div> Correo: {{ profile.email }} </div>
-    <div> Nombre: {{ profile.name }} </div>
-    <div> Usuario: {{ profile.username }} </div>
-    <div> Apellido: {{ profile.lastname}} </div>
+    <div>Correo: {{ profile.email }}</div>
+    <div>Nombre: {{ profile.name }}</div>
+    <div>Usuario: {{ profile.username }}</div>
+    <div>Apellido: {{ profile.lastname }}</div>
+    {% include 'components/title.html' with category='Ultima compra' %}
+
+    <div class="bg-gray-200 my-2 rounded-lg border border-gray-400">
+      <div class="flex bg-gray-100 text-sm rounded-t-lg px-2">
+        <p>{{ order.date }}</p>
+      </div>
+
+      <div class="flex justify-between p-2">
+
+        <div class="flex [&>*:nth-child(1n+4)]:hidden md:[&>*:nth-child(1n-1)]:block">
+          {% for product in products %}
+            <img class="aspect-square w-16 h-16 lg:w-16 lg:h-16 rounded-lg mr-2" src="{{ product.image.url }}" alt="" />
+          {% endfor %}
+        </div>
+
+        <div class="w-1/3">
+          {% include 'components/button.html' with text='Ver pedido' color='blue' text_size='xs' width="full" class="mb-1" %}
+          {% include 'components/button.html' with text='Volver a comprar' color='blue' text_size='xs' width="full" %}
+        </div>
+
+      </div>
+
+    </div>
     
-</div>
+    <div class="font-bold">
+      Ver todo
+    </div>
+
+    <h1>Mis direcciones</h1>
+    <h1>Mis metodos de pago</h1>
+    <h1>Servicio a cliente</h1>
+    <h1>Configurar mi cuenta</h1>
+  </div>
 {% endblock %}
