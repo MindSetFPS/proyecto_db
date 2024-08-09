@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import UserRegistrationForm, LoginForm
+# from .forms import UserRegistrationForm, LoginForm
+from shopApp.forms import UserRegistrationForm, LoginForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.sessions.models import Session
 import time
-from .models import Product, ShoppingCart, Order, OrderDetail, Category, Image, Customer
-
+# from .models import Product, ShoppingCart, Order, OrderDetail, Category, Image, Customer
+from shopApp.models import Product, ShoppingCart, Order, OrderDetail, Category, Image, Customer
 
 def create_category_list(product: Product):
     categories = []
@@ -57,8 +58,17 @@ def profile(request):
             'name': user.first_name,
             'last_name': user.last_name
         }
+        
+        last_order = Order.objects.filter(customer=user).order_by('-date').first()
+        last_order_products = OrderDetail.objects.filter(order=last_order).all()
+        
+        for product in last_order_products:
+            product.image = product.product.image_set.first()
+            
+        for product in last_order_products:
+            print(product.image)
 
-        return render(request, 'profile.html', {'profile': user_data})
+        return render(request, 'profile.html', {'profile': user_data, 'order': last_order, 'products': last_order_products})
     # r:eturn HttpResponse(request.session.session_key)
     return redirect('login')
 
