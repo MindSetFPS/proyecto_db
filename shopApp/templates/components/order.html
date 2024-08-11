@@ -18,15 +18,13 @@
               src="{{ product.image.url }}" alt="" 
             />
           {% endfor %}
-    
-          {% if amount_of_products > 4 %}
+
+          {% if order.amount_of_products > 4 %}
             <div class="self-center flex text-xs ">
                 <!-- TODO: I think this can be simplified with obscure css tricks, may check later-->
-                <p class="hidden lg:block" x-data="{ amountOfProducts: {{ amount_of_products }} - 4}" x-text="amountOfProducts + ' productos más'"></p>
-                <p class="block lg:hidden" x-data="{ amountOfProducts: {{ amount_of_products }} - 2}" x-text="amountOfProducts + ' productos más'"></p>
-                
+                <p class="hidden lg:block" x-data="{ amountOfProducts: {{ order.amount_of_products }} - 4}" x-text="amountOfProducts + ' productos más'"></p>
+                <p class="block lg:hidden" x-data="{ amountOfProducts: {{ order.amount_of_products }} - 2}" x-text="amountOfProducts + ' productos más'"></p>
             </div>
-          
           {% endif %}
         </div>
 
@@ -36,7 +34,6 @@
             </a>
           {% include 'components/button.html' with text='Volver a comprar' color='blue' text_size='xs' width="full" class="lg:w-48"%}
         </div>
-
       </div>
 
     </div>

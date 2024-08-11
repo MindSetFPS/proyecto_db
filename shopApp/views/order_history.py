@@ -11,7 +11,9 @@ def order_history(request: HttpRequest):
 
     for order in orders:
         order.items = OrderDetail.objects.filter(order=order).all()
-        
+        order.amount_of_products = len(order.items)
+        order.items = order.items[:4]
+
         for item in order.items:
             item.image = item.product.image_set.first()
 
