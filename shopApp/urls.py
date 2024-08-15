@@ -18,5 +18,8 @@ urlpatterns = [
     path('categories/<str:category>', category, name='category'),
     path('order-history/', order_history, name='order_history'),
     path('order/<int:order_id>', order, name='order'),
+    path('buy', buy, name='buy'),
+    path('payment', payment, name='payment'),
+    path('notification', notification, name='notification'),
     # path('category/', views.category, name='category'),
 ]

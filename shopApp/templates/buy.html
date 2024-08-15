@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <button id="buy">Comprar</button>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    const button = document.getElementById('buy')
+    
+    button.addEventListener('click', async () => {
+      const res = await fetch('/payment', {
+        method: 'POST',
+        // credentials: 'same-origin',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      })
+    
+      const data = await res.json()
+        console.log(data)
+      window.location.href = data.init_point
+    })
+  </script>
+{% endblock %}

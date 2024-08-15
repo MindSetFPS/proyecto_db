@@ -35,7 +35,6 @@ def index(request):
     # Get products images
     for product in product_list:
         image = Image.objects.filter(product=product).first()
-        print(image)
         product.image_url = image.url
     return render(request, 'home.html', {'productos': product_list})
 
