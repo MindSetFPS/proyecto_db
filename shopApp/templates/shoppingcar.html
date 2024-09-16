@@ -10,9 +10,9 @@
           <div class="grid grid-cols-2 md:grid-cols-6 justify-between w-full">
             <a href="{% url 'product' product.id %}" class="col-span-2 md:col-span-4 font-bold line-clamp-3 text-xs md:text-base leading-3 hover:underline">{{ product.name }}</a>
 
-            <div class=" text-center">${{ product.price|floatformat:'2g' }}</div>
+            <div class="text-center">${{ product.price|floatformat:'2g' }}</div>
 
-            <div class=" flex flex-col items-end">
+            <div class="flex flex-col items-end">
               <p>${{ product.total|floatformat:'2g' }}</p>
 
               <div class="flex">
@@ -35,15 +35,15 @@
           </div>
         </div>
       {% empty %}
-      <div class="flex flex-col items-center h-full">
-        <p class="md:text-4xl">No hay productos en tu carrito.</p>
-        <div class="mt-4">
-          {% if not user.is_authenticated %}
-            <a class="text-lg rounded-md bg-blue-500 py-2 px-5 text-white hover:bg-blue-400 transition" href="{% url 'login' %}"> Iniciar sesión</a>
-          {% endif %}
-        <a class="text-lg rounded-md bg-gray-100 py-2 px-5 hover:bg-gray-50 transition" href="{% url "index" %}">Ver más productos</a>
+        <div class="flex flex-col items-center h-full">
+          <p class="md:text-4xl">No hay productos en tu carrito.</p>
+          <div class="mt-4">
+            {% if not user.is_authenticated %}
+              <a class="text-lg rounded-md bg-blue-500 py-2 px-5 text-white hover:bg-blue-400 transition" href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
+            <a class="text-lg rounded-md bg-gray-100 py-2 px-5 hover:bg-gray-50 transition" href="{% url 'index' %}">Ver más productos</a>
+          </div>
         </div>
-      </div>
       {% endfor %}
     </div>
 
@@ -64,9 +64,39 @@
           <strong>${{ total_price|add:199|floatformat:'2g' }}</strong>
         </div>
         <div>
-          <a href="{% url 'buy_cart' %}"><button class="w-full rounded-md bg-green-500 p-2 text-white font-semibold hover:bg-green-700 transition">Finalizar compra</button></a>
+          <button id="checkout-button" class="w-full rounded-md bg-green-500 p-2 text-white font-semibold hover:bg-green-700 transition">Finalizar compra</button>
         </div>
       </div>
     {% endif %}
   </div>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+  
+  const button = document.getElementById('checkout-button')
+  
+  {% if not request.user.is_authenticated %}
+  button.addEventListener('click', async () => {
+    window.location.href = '/login'
+  })
+  {% endif %}
+  
+  {% if request.user.is_authenticated %}
+  button.addEventListener('click', async () => {
+    const res = await fetch('/buy', {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+ })
+
+    if (res.status === 200) {
+      const data = await res.json()
+      window.location.href = data.init_point
+    }
+  })
+  {% endif %}
+  
+</script>
 {% endblock %}
