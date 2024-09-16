@@ -9,3 +9,10 @@ Creamos la conexión a la base de datos.
 Creamos nuestras tablas.
 Creamos nuestras vistas.
 Creamos nuestras rutas.
+
+El proyecto require un archivo .env con la siguiente estructura:
+
+```
+MP_ACCESS_TOKEN=key
+MP_WEBHOOK_SECRETE_KEY=key
+```

@@ -93,23 +93,21 @@ DATABASES = {
     }
 }
 
-""" DATABASES = {
+# settings.py
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "mssql",
+#         "NAME": "master",
+#         "USER": "sa",
+#         "PASSWORD": "r00t.R00T",
+#         "HOST": "localhost",
+#         "PORT": "1433",
+#         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+#         },
+#     },
+# } 
 
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'online-shop',
-
-        'USER': os.getenv('DB_USER'),
-
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-
-        'HOST': os.getenv('DB_HOST'),
-
-        'PORT': os.getenv('DB_PORT'),
-    }
-} """
+print(os.getenv('DB_USER'))
 
 
 # Password validation
