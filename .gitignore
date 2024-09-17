@@ -7,3 +7,6 @@ staticfiles/
 SQL/
 .env
 del.py
+chrome
+geckodriver
+.env
