@@ -7,6 +7,6 @@
     @click="dropdownOpen = !dropdownOpen"
 >
     {% include "icons/"|add:icon %}
-    <p>{{ text }}</p>
+    <p id="{{ text|lower}}">  {{ text }}</p>
     {% include "components/dropdown.html" with items=items_list login_required=login_required %}
 </div>
