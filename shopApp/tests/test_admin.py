@@ -17,7 +17,7 @@ class OrderHistoryViewTests(TestCase):
             description="A high-end laptop",
             category=self.category
         )
-        self.image = Image.objects.create(product=self.product, image_url='http://example.com/image.jpg')
+        self.image = Image.objects.create(product=self.product, url='http://example.com/image.jpg')
         self.order = Order.objects.create(customer=self.user, total=999.99)
         self.order.items.add(self.product, through_defaults={'quantity': 1})
 
