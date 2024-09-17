@@ -16,3 +16,5 @@ El proyecto require un archivo .env con la siguiente estructura:
 MP_ACCESS_TOKEN=key
 MP_WEBHOOK_SECRETE_KEY=key
 ```
+
+Para hacer los test de systema contamos con selenium que nos permitirá probar nuestra aplicación desde los navegadores chrome y firefox. Para hacer uso de ellos deberemos instalar la librería de python correspondiente, y descargar los binarios de los controladores de cada respectivo navegador.
