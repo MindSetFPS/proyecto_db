@@ -16,11 +16,18 @@ class Customer(models.Model):
     address = models.CharField(max_length=255)
 
 # Pedido
+# TODO: customer FK should be Customer model, not User model(analyze ramifications of this mistake)
 class Order(models.Model):
     items = models.ManyToManyField('Product', through='OrderDetail')  # Uso de cadenas de caracteres
     date = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     total = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+    class Status(models.IntegerChoices):
+        processing = 1, "Processing"
+        ready = 2, "Ready to ship"
+        onTheWay = 3, "On the way"
+        delivered = 4, "Delivered"
+    status = models.IntegerField(choices=Status)
 
 
 

@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpRequest
+from django.http import HttpResponse, Http404, HttpRequest
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 # from .forms import UserRegistrationForm, LoginForm
 from shopApp.forms import UserRegistrationForm, LoginForm
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.sessions.models import Session
-import time
 # from .models import Product, ShoppingCart, Order, OrderDetail, Category, Image, Customer
-from shopApp.models import Product, ShoppingCart, Order, OrderDetail, Category, Image, Customer
+from shopApp.models import Product, ShoppingCart, Category, Image, Customer
 
 def create_category_list(product: Product):
     categories = []
@@ -184,44 +181,6 @@ def view_cart(request):
         item_count = item_count + item.amount
 
     return render(request, 'shoppingcar.html', {'cart_items': cart_items, 'products': products, 'total_price': total_price, 'item_count': item_count})
-
-# AI GENERATED, NOT CHECKED YET
-def buy_cart(request):
-    # If user is not authenticated
-    if not request.user.is_authenticated:
-        return redirect('register')  # Redirect to registration page
-
-    session_id = request.session.session_key
-    # cart_items = ShoppingCart.objects.filter(session_id=session_id)
-
-    if request.user.is_authenticated:
-        print('find shopping cart with user id')
-        cart_items = ShoppingCart.objects.filter(user=request.user)
-
-    if not cart_items.exists():
-        return HttpResponse("No items in cart")
-
-    total = 0
-    # Purchase products
-    for item in cart_items:
-        prod = Product.objects.get(id=item.product_id)
-        if prod.stock >= item.amount:
-            prod.stock -= 1
-            prod.save()
-            total = total + prod.price
-        else:
-            return redirect('view_cart')
-        item.delete()  # Remove the cart item after purchase
-
-    order = Order(customer=request.user, total=total)
-    order.save()
-
-    for item in cart_items:
-        prod = Product.objects.get(id=item.product_id)
-        order_detail = OrderDetail(order=order, product=prod, quantity=item.amount)
-        order_detail.save()
-
-    return render(request, 'purchase_successful.html', {'total_price': total})
 
 def category(request, category):
     if len(category) == 0:

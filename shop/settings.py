@@ -23,9 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x_h14mr^4&fqv!#8tu#ljk)vb(jw(d9yfw_9eyov((#7kh2_@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'ec2-18-223-155-227.us-east-2.compute.amazonaws.com']
+LOGIN_URL = '/login'
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'ec2-18-223-155-227.us-east-2.compute.amazonaws.com', '192.168.1.140', 'https://db93-2806-10b7-3-92f4-00-1.ngrok-free.app', 'db93-2806-10b7-3-92f4-00-1.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://db93-2806-10b7-3-92f4-00-1.ngrok-free.app']
+
+# Non standard variable, it does not exist in django's documentation
+SITE_URL = "https://db93-2806-10b7-3-92f4-00-1.ngrok-free.app"
 
 # Application definition
 
@@ -70,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'shopApp.context_processor.my_context_processor',
                 'shopApp.context_processor.categories',
+                'shopApp.context_processor.profile_links',
             ],
         },
     },
@@ -128,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Merida'
 
 USE_I18N = True
 
