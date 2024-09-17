@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, HttpResponseBadRequest
 import mercadopago
 import os, json, hmac, hashlib
+
 # from django.conf.global_settings import 
 
 MP_ACCESS_TOKEN = os.environ.get('MP_ACCESS_TOKEN')

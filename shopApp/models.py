@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
+
 # Create your models here.
 
 class ShoppingCart(models.Model):
@@ -16,9 +17,12 @@ class Customer(models.Model):
 
 # Pedido
 class Order(models.Model):
+    items = models.ManyToManyField('Product', through='OrderDetail')  # Uso de cadenas de caracteres
     date = models.DateTimeField(auto_now_add=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
     total = models.DecimalField(max_digits=16, decimal_places=2, default=0)
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255, null=True)
@@ -39,12 +43,12 @@ class Product(models.Model):
 
 #PedidoDetalle
 class OrderDetail(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=0)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=0)
     quantity = models.IntegerField(default=0)
     
 class Image(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
     url = models.URLField(max_length=1023)
     
 # TODO: Auditorías

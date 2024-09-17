@@ -10,11 +10,13 @@ def order_history(request: HttpRequest):
     orders = Order.objects.filter(customer=user).order_by('-date').all()
 
     for order in orders:
-        order.items = OrderDetail.objects.filter(order=order).all()
-        order.amount_of_products = len(order.items)
-        order.items = order.items[:4]
+        order_details = OrderDetail.objects.filter(order=order).all()
+        order.amount_of_products = order_details.count()  # Número total de productos en la orden
+        limited_items = order_details[:4]  # Limitar a los primeros 4 productos
 
-        for item in order.items:
+        for item in limited_items:
             item.image = item.product.image_set.first()
 
-    return render(request, 'order-history.html', {'orders':orders})
+        order.items_limited = limited_items  # Guardar los productos limitados para mostrarlos en la plantilla
+
+    return render(request, 'order-history.html', {'orders': orders})
