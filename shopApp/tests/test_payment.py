@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from unittest.mock import patch
 import json
-from shopApp.views.payment import PaymentView, NotificationView
+from mercadopago import SDK
 
 class PaymentViewTests(TestCase):
     def setUp(self):

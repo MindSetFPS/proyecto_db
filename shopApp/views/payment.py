@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, HttpRe
 from django.conf import settings
 import mercadopago
 import os, json, hmac, hashlib
+
 # from django.conf.global_settings import 
 
 MP_ACCESS_TOKEN = os.environ.get('MP_ACCESS_TOKEN')
