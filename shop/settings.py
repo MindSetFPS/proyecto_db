@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x_h14mr^4&fqv!#8tu#ljk)vb(jw(d9yfw_9eyov((#7kh2_@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 LOGIN_URL = '/login'
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'ec2-18-223-155-227.us-east-2.compute.amazonaws.com', '192.168.1.140', 'https://db93-2806-10b7-3-92f4-00-1.ngrok-free.app', 'db93-2806-10b7-3-92f4-00-1.ngrok-free.app']
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor'
+    'ckeditor',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'shop.urls'
@@ -171,3 +174,7 @@ JAZZMIN_SETTINGS = {
     "custom_css": "css/admin.css",
     "site_logo": "logo256.jpg"
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

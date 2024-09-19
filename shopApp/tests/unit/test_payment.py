@@ -44,4 +44,3 @@ class PaymentViewTests(TestCase):
         mock_hmac_obj.hexdigest.return_value = 'invalid_hmac_signature'
         response = self.client.post(reverse('notification'), data={'id': 'data_id_123'}, **headers)
         self.assertEqual(response.status_code, 400)
-

@@ -42,5 +42,3 @@ class OrderViewTest(TestCase):
     def test_order_view_with_unauthenticated_user(self):
         # Make a GET request to the order view without logging in
         response = self.client.get('/login')
-        
-     
