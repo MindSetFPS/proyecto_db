@@ -10,10 +10,10 @@
 ### 1. Análisis de los Requisitos y Especificaciones del Software
 Antes de desarrollar las pruebas, se realizó un análisis detallado de los requisitos del sistema y las especificaciones proporcionadas para las funcionalidades de protección de datos y autorización de usuarios. Los objetivos principales del sistema incluyen:
 
-- Garantizar que los usuarios no puedan acceder a datos de otros usuarios (principio **#2: Testear exhaustivamente es imposible**; por lo tanto, las pruebas se enfocan en los aspectos críticos de seguridad).
-- Implementar autenticación robusta para asegurar que solo los usuarios autorizados accedan a información sensible (principio **#3: La detección temprana de defectos** sugiere priorizar las pruebas de seguridad desde etapas tempranas).
+- Garantizar que los usuarios no puedan acceder a datos de otros usuarios; por lo tanto, las pruebas se enfocan en los aspectos críticos de seguridad).
+- Implementar autenticación robusta para asegurar que solo los usuarios autorizados accedan a información sensible.
 - Asegurar que las contraseñas y claves privadas estén correctamente encriptadas y almacenadas.
-- Prevenir inyecciones de datos y la modificación directa de la base de datos (principio **#1: La prueba revela la presencia de defectos, no su ausencia**).
+- Prevenir inyecciones de datos y la modificación directa de la base de datos.
 
 ### 2. Identificación de Escenarios y Condiciones de Prueba
 Se definieron los siguientes escenarios de prueba para validar la seguridad del sistema y las restricciones de acceso:
@@ -35,7 +35,7 @@ Las pruebas están diseñadas para cumplir con los siguientes objetivos:
 
 - Validar que solo los usuarios autenticados puedan acceder a sus propios datos.
 - Comprobar que los usuarios no puedan ver ni modificar datos de otros usuarios.
-- Asegurar que la información sensible como contraseñas y claves del entorno no esté en texto plano ni en el frontend (principio **#4: La concentración de defectos**).
+- Asegurar que la información sensible como contraseñas y claves del entorno no esté en texto plano ni en el frontend.
 - Revisar que el sistema no permita el uso de caracteres especiales o inyecciones SQL para acceder a datos.
 
 ### 4. Diseño y Escritura de Casos de Prueba
@@ -49,15 +49,15 @@ Se desarrollaron los siguientes casos de prueba para cada objetivo:
 - **Caso de Prueba #2**: Acceso a datos de otros usuarios.
   - **Input**: URL de un perfil ajeno.
   - **Esperado**: Error `403 Forbidden` o redirección.
-  - **Principio Aplicado**: **#2: Testear exhaustivamente es imposible**, se enfocan las pruebas en los permisos de acceso.
+  - **Principio Aplicado**: se enfocan las pruebas en los permisos de acceso.
 
 - **Caso de Prueba #3**: Modificación de datos sin permisos.
   - **Input**: `POST` de modificación con un usuario regular.
   - **Esperado**: Mensaje de acceso denegado y ninguna modificación en la base de datos.
-  - **Principio Aplicado**: **#6: La ausencia de errores es una ilusión**: aunque no haya fallos en la UI, las pruebas backend son necesarias.
+  - **Principio Aplicado**:aunque no haya fallos en la UI, las pruebas backend son necesarias.
 
 ### 5. Revisión y Refinamiento de Casos de Prueba
-Los casos de prueba fueron revisados para asegurar que cubrieran los escenarios críticos de seguridad y permisos de acceso. Se incorporaron nuevas pruebas basadas en los resultados preliminares para cubrir posibles casos de borde (principio **#3: La detección temprana de defectos**, se revisaron también desde la implementación).
+Los casos de prueba fueron revisados para asegurar que cubrieran los escenarios críticos de seguridad y permisos de acceso. Se incorporaron nuevas pruebas basadas en los resultados preliminares para cubrir posibles casos de borde, se revisaron también desde la implementación).
 
 ### 6. Ejecución de Pruebas y Reporte de Defectos
 Las pruebas se ejecutaron en el entorno de desarrollo utilizando `pytest` y `unittest` para las pruebas unitarias, junto con `selenium` para pruebas de integración en la UI. Los defectos detectados incluyeron:
@@ -69,7 +69,7 @@ Las pruebas se ejecutaron en el entorno de desarrollo utilizando `pytest` y `uni
 ### 7. Actualización y Mantenimiento de Casos de Prueba a lo Largo del Ciclo de Vida del Desarrollo
 Los casos de prueba se actualizaron a medida que se realizaron cambios en las funcionalidades y el acceso. Se añadieron pruebas de regresión para asegurarse de que las correcciones no introdujeran nuevos defectos.
 
-- **Principio Aplicado**: **#7: Las pruebas dependen del contexto**, ya que se ajustaron los casos a nuevas políticas de acceso y autenticación implementadas.
+- **Principio Aplicado**: ya que se ajustaron los casos a nuevas políticas de acceso y autenticación implementadas.
 
 ![user_security testing](user_security.png)
 
@@ -93,7 +93,7 @@ Los requisitos específicos incluyen:
 
 - Prevenir el uso de nombres de usuario duplicados que difieran solo en los espacios iniciales o finales (por ejemplo, `user` y ` user `).
 - Comprobar que las direcciones de correo electrónico no puedan ser manipuladas con espacios adicionales.
-- Mostrar un mensaje de error claro y entendible para el usuario en caso de que intente registrarse con un nombre de usuario o correo electrónico que ya exista en la base de datos con o sin estos espacios (principio **#5: Paradoja del pesticida**, ya que es importante variar las entradas para detectar estos defectos).
+- Mostrar un mensaje de error claro y entendible para el usuario en caso de que intente registrarse con un nombre de usuario o correo electrónico que ya exista en la base de datos con o sin estos espacio, ya que es importante variar las entradas para detectar estos defectos).
 - Asegurar que el sistema maneje los casos de borde, como múltiples espacios intermedios, para evitar conflictos en el backend.
 
 ### **2. Identificación de Escenarios y Condiciones de Prueba**
@@ -111,7 +111,7 @@ Estos escenarios reflejan los principales casos de borde que podrían causar con
 Las pruebas se diseñaron con los siguientes objetivos:
 
 - Validar que el sistema elimine correctamente los espacios en blanco antes de procesar el nombre de usuario y el correo electrónico.
-- Comprobar que los mensajes de error sean claros para el usuario final y expliquen por qué no se puede usar la entrada proporcionada (principio **#3: La detección temprana de defectos**).
+- Comprobar que los mensajes de error sean claros para el usuario final y expliquen por qué no se puede usar la entrada proporcionada.
 - Garantizar que no se generen usuarios duplicados en la base de datos debido a diferencias en los espacios en blanco.
 - Evaluar el manejo de datos de entrada anómalos en los formularios de registro para prevenir posibles ataques de manipulación de datos.
 
@@ -121,7 +121,6 @@ Los siguientes casos de prueba se desarrollaron para validar el correcto funcion
 - **Caso de Prueba #1**: Intentar registrar un nombre de usuario con espacios al inicio y al final.
   - **Input**: ` username ` (con espacios al inicio y al final).
   - **Esperado**: El sistema debe considerar `username` como duplicado si ya existe sin espacios, y mostrar un mensaje de error adecuado.
-  - **Principio Aplicado**: **#4: La concentración de defectos** sugiere probar variaciones en las entradas similares.
 
 - **Caso de Prueba #2**: Intentar registrar un correo electrónico con espacios adicionales.
   - **Input**: ` email@example.com `.
@@ -154,5 +153,4 @@ Las pruebas se ejecutaron en un entorno controlado utilizando `pytest` y `unitte
 ### **7. Actualización y Mantenimiento de Casos de Prueba a lo Largo del Ciclo de Vida del Desarrollo**
 Se actualizaron los casos de prueba para reflejar los cambios en la validación de entradas y se añadieron nuevas pruebas de regresión para garantizar que el sistema detecte todas las variaciones de entradas con espacios en blanco.
 
-- **Principio Aplicado**: **#7: Las pruebas dependen del contexto**, adaptando las pruebas a nombres de usuario y correos según las reglas de validación.
 ![Errores correctos](image.png)
