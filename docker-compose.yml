@@ -1,23 +1,32 @@
 version: '3'
 
 services:
-  web:
-    build: .
-    ports:
-      - "80:8000"
-    environment:
-      - DB_PASSWORD
-      - DB_HOST
-      - DB_USER
-      - DB_PORT
+#  web:
+ #   build: .
+  #  ports:
+   #   - "80:8000"
+    #environment:
+     # - DB_PASSWORD
+      #- DB_HOST
+      #- DB_USER
+      #- DB_PORT
     # depends_on:
       # - db
-      
-  # adminer:
-    # image: adminer
-    # restart: always
-    # ports:
-      # - 8087:8080
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8083:8080
+
+    db:
+      image: mysql:latest
+      restart: always
+      ports:
+        - 3306:3306
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: app
 
   # nginx-proxy:
     # image: jwilder/nginx-proxy
@@ -51,22 +60,3 @@ services:
       # - html:/usr/share/nginx/html
       # - acme:/etc/acme.sh
       # - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  # db:
-    # image: mcr.microsoft.com/mssql/server:2022-latest
-    # environment:
-      # - POSTGRES_USER=master
-      # - MSSQL_SA_PASSWORD=r00t.R00T
-      # - POSTGRES_DB=0yZlOCFhWYvcJJe34UIb
-      # - ACCEPT_EULA=Y
-    # volumes:
-      # - db-data:/var/lib/postgresql/data
-
-# volumes:
-#   db-data:
-
-volumes:
-  certs:
-  html:
-  vhostd:
-  acme:
