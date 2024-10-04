@@ -5,10 +5,11 @@
 {% include 'components/title.html' with category="Historial de Pedidos" %}
 
 <div class="px-2 lg:px-0">
-    {% for order in orders %}
-    
+    {% for item in order.items.all %}
+
+
     {% include 'components/order.html' with products=order.items %}
-    
+
     {% endfor %}
 </div>
 
