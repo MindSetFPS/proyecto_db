@@ -7,3 +7,8 @@ staticfiles/
 SQL/
 .env
 del.py
+chrome
+geckodriver
+.env
+*.png
+*.pdf

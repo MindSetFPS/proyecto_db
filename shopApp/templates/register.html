@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form }}
-        <input class="w-full md:w-32 bg-gray-100 rounded-md p-2  hover:bg-gray-300 transition w-full" type="submit" value="Registrarme"/> 
+        <input id="submit_button"class="w-full md:w-32 bg-gray-100 rounded-md p-2  hover:bg-gray-300 transition w-full" type="submit" value="Registrarme"/> 
         <a href="{% url "login" %}" class="text-gray-500 text-sm font-bold hover:underline">Ya tienes una cuenta? Iniciar sesión</a>
     </form>
 </div>

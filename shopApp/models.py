@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
-
 # Create your models here.
 
 class ShoppingCart(models.Model):
@@ -34,8 +33,6 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} - {self.get_status_display()}"
 
-
-
 class Category(models.Model):
     name = models.CharField(max_length=255, null=True)
     parent = models.ForeignKey('self', null=True, blank=True ,on_delete=models.CASCADE)
@@ -55,7 +52,7 @@ class Product(models.Model):
 
 #PedidoDetalle
 class OrderDetail(models.Model):
-    order = models.ForeignKey('Order', on_delete=models.CASCADE, default=0)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=0)
     quantity = models.IntegerField(default=1)
     def __str__(self):

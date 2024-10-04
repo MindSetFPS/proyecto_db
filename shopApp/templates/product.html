@@ -31,7 +31,7 @@
         <div>Envío: $139.00</div>
         <form action="{% url 'add_to_cart' product.id %}" method="post">
           {% csrf_token %}
-          {% include 'components/button.html' with color='blue' type='submit' text="Agregar al carrito" width="full" %}
+          {% include 'components/button.html' with color='blue' id="add_to_cart_button" type='submit' text="Agregar al carrito" width="full" %}
         </form>
       </div>
     </div>
