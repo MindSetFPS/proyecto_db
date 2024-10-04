@@ -85,30 +85,18 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+## To make mysqlclient available, in fedora you need to install mysql-devel
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'app',
+            'USER': 'root',
+            'PASSWORD': 'password',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            }
 }
-
-# settings.py
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "mssql",
-#         "NAME": "master",
-#         "USER": "sa",
-#         "PASSWORD": "r00t.R00T",
-#         "HOST": "localhost",
-#         "PORT": "1433",
-#         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
-#         },
-#     },
-# } 
-
-print(os.getenv('DB_USER'))
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
