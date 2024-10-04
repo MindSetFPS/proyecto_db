@@ -73,6 +73,8 @@ Los casos de prueba se actualizaron a medida que se realizaron cambios en las fu
 
 ![user_security testing](user_security.png)
 
+\pagebreak
+
 ### **Reporte de Pruebas Unitarias: `test_register_spaces.py`**
 
 

@@ -6,6 +6,7 @@ import json
 from unittest.mock import patch
 from shopApp.admin import ProductAdmin
 
+## LISTO
 class OrderHistoryViewTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='12345')
@@ -17,8 +18,8 @@ class OrderHistoryViewTests(TestCase):
             description="A high-end laptop",
             category=self.category
         )
-        self.image = Image.objects.create(product=self.product, image_url='http://example.com/image.jpg')
-        self.order = Order.objects.create(customer=self.user, total=999.99)
+        self.image = Image.objects.create(product=self.product, image_url='http://example.com/image.jpg') ## se cambio en la bd de image.url a image_url
+        self.order = Order.objects.create(customer=self.user, total=999.99,status='2')
         self.order.items.add(self.product, through_defaults={'quantity': 1})
 
         self.client = Client()
@@ -32,6 +33,6 @@ class OrderHistoryViewTests(TestCase):
         self.assertIn('orders', response.context)
         orders = response.context['orders']
         self.assertEqual(len(orders), 1)
-        self.assertEqual(orders[0].amount_of_products, 1)
-        self.assertEqual(len(orders[0].items.all()), 1)
-        self.assertEqual(orders[0].items.first().image, self.image)
+        self.assertEqual(orders[0].items.count(), 1)
+        first_image = orders[0].items.first().image_set.first()    
+        self.assertEqual(first_image, self.image)
