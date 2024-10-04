@@ -32,7 +32,11 @@ def index(request):
     # Get products images
     for product in product_list:
         image = Image.objects.filter(product=product).first()
-        product.image_url = image.url
+        if image:
+            product.image_url = image.image_url  
+        else:
+            product.image_url = None  
+
     return render(request, 'home.html', {'productos': product_list})
 
 def product(request, product_id):
@@ -105,8 +109,7 @@ def remove_product_cart(request: HttpRequest, product_id):
 def add_to_cart(request: HttpRequest, product_id):
     product = get_object_or_404(Product, id=product_id)
 
-    if request.POST:
-        print('this was a post')
+    if request.method == 'POST':
 
         session_id = request.session.session_key
         if not session_id:
@@ -172,7 +175,7 @@ def view_cart(request):
             'price': prod.price,
             'amount': item.amount,
             'id': item.product_id,
-            'image_url': Image.objects.filter(product=prod).first().url,
+            'image_url': Image.image_url,
             'total': prod.price * item.amount
         }
 
@@ -192,6 +195,6 @@ def category(request, category):
         
         for product in products:
             image = Image.objects.filter(product=product).first()
-            product.image_url = image.url
+            product.image_url = image.image_url
 
         return render(request, 'category.html', {'products': products, 'category': cat.name})

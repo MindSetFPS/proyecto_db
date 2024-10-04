@@ -40,6 +40,10 @@ Pruebas de carga enviando múltiples solicitudes a un servidor web Apache para e
 ## Prueba de Django Debug Toolbar
 Django Debug Toolbar es una herramienta de desarrollo para Django que muestra información sobre el rendimiento de una aplicación web, como el tiempo de respuesta de la base de datos, el número de consultas realizadas y el tiempo de ejecución de cada vista.
 
+<<<<<<< HEAD
+`docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=r00t.R00T" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest`
+
+=======
 Descargamos el django debug toolbar y lo instalamos en nuestro proyecto de django. Esto hará que aparezca en nuestro navegador una barra de herramientas con información sobre el rendimiento de nuestra aplicación. 
 
 
@@ -223,3 +227,4 @@ Rees, D. (2024, February 27). What is usability testing? | Experience UX. Experi
 R, B. (2024, September 12). What Is Performance Testing? Types, Tools & Examples. QA Touch. https://www.qatouch.com/blog/performance-testing/
 
 Suleymanov, N. (2024, July 19). Everything you need to know about compatibility testing in 1 article. Aqua Cloud - Best Software for Testing. https://aqua-cloud.io/compatibility-testing/
+>>>>>>> ff383547e512e86344ccdee1b4ecf43c4c381dbf
