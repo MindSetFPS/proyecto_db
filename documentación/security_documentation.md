@@ -155,9 +155,4 @@ Las pruebas se ejecutaron en un entorno controlado utilizando `pytest` y `unitte
 Se actualizaron los casos de prueba para reflejar los cambios en la validación de entradas y se añadieron nuevas pruebas de regresión para garantizar que el sistema detecte todas las variaciones de entradas con espacios en blanco.
 
 - **Principio Aplicado**: **#7: Las pruebas dependen del contexto**, adaptando las pruebas a nombres de usuario y correos según las reglas de validación.
-
-### **Conclusión y Recomendaciones**
-Las pruebas de registro revelaron defectos importantes en la validación de espacios en blanco y la detección de duplicados. Se recomienda implementar validaciones adicionales en el frontend y backend para estandarizar las entradas antes de procesarlas y evitar inconsistencias.
-
-Además, se sugiere revisar el manejo de errores y los mensajes proporcionados al usuario para hacerlos más específicos y evitar posibles confusiones durante el registro.
-![register_spaces testing](register_spaces.png)
+![Errores correctos](image.png)

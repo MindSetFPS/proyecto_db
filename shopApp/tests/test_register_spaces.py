@@ -19,7 +19,7 @@ class UserCreationSpacesTestCase(TestCase):
         })
         # Verificar que no se pueda crear un usuario con el mismo nombre pero con espacios
         self.assertEqual(response.status_code, 200)  # El código debe ser 200 porque la creación no debe ser exitosa
-        
+        self.assertContains(response, "El nombre de usuario ya existe")  # Mensaje de error esperado
 
     def test_create_user_with_intermediate_spaces_in_username(self):
         # Intentar crear un usuario con espacios intermedios en el `username`
@@ -28,10 +28,10 @@ class UserCreationSpacesTestCase(TestCase):
             'password': 'password123',
             'password2': 'password123',
             'email': 'unique_email@example.com'
-        }) 
+        })
         # Validar que se rechace el registro de este `username`
         self.assertEqual(response.status_code, 200)
-        
+        self.assertContains(response, "No se permiten espacios en el nombre de usuario")
 
     def test_create_user_with_leading_and_trailing_spaces_in_email(self):
         # Intentar crear un nuevo usuario con espacios al principio y al final del `email`
@@ -42,8 +42,8 @@ class UserCreationSpacesTestCase(TestCase):
             'email': '  test@example.com  '  # Espacios al inicio y al final
         })
         # Verificar que no se pueda crear un usuario con el mismo `email` pero con espacios
-        self.assertEqual(response.status_code, 302)
-        
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "El correo electrónico ya está en uso")
 
     def test_create_user_with_intermediate_spaces_in_email(self):
         # Intentar crear un nuevo usuario con un `email` con espacios intermedios
@@ -55,4 +55,4 @@ class UserCreationSpacesTestCase(TestCase):
         })
         # Validar que se rechace el registro de este `email`
         self.assertEqual(response.status_code, 200)
-      
+        self.assertContains(response, "Correo electrónico no válido")
