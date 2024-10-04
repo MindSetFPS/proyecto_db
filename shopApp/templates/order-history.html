@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'components/title.html' with category="Historial de Pedidos" %}
+
+<div class="px-2 lg:px-0">
+    {% for order in orders %}
+    
+    {% include 'components/order.html' with products=order.items %}
+    
+    {% endfor %}
+</div>
+
+{% endblock content %}

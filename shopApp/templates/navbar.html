@@ -1,34 +1,30 @@
-<div x-data="{ open: false }">
+<!-- TODO: Fix on mobile-->
+<div x-data="{ 
+  open: false,
+  dropdownStyleLeft: '',
+  dropdownHeightMobile: '',
+}"
 
-  <nav class="flex justify-evenly bg-gray-100 text-blue-600 ">
+x-init="$nextTick(() => {
+    // Computed properties must be declared in the $nextTick callback, otherwise they won't be available in the template
+    var button = document.getElementById('dropdown-button')
+    var dropwdown = document.getElementById('dropdown')
+    var x = button.getBoundingClientRect();
+    
+    dropdownStyleLeft = (x.left - dropdown.offsetWidth) + 'px';
+    
+    var navbar = document.getElementById('navbar')
+    navbarHeight = navbar.offsetHeight + 'px';
+    dropdownHeightMobile = (window.innerHeight - navbar.offsetHeight ) + 'px';
+});"
+>
+  <nav id="navbar" class="flex fixed top-0 left-0 w-screen z-50 justify-evenly bg-white text-blue-600 ">
     <a class="hover:underline flex flex-col items-center" href="{% url 'index' %}">
       <div>
         {% include "icons/home.html" %}
       </div>
       <p>inicio</p>
     </a>
-    
-    {% if user.is_authenticated %}
-    <a class="hover:underline flex flex-col items-center" href="{% url 'profile' %}">
-      <div>
-        {% include "icons/user.html" %}
-      </div>
-      <p>perfil</p>
-    </a>
-    <a class="hover:underline flex flex-col items-center" href="{% url 'logout' %}" > 
-      <div>
-        {% include "icons/exit.html" %}
-      </div>
-      <p>Salir</p>
-    </a>
-    {% endif %}
-    
-      <button class="hover:underline" @mouseover.debounce="open = true" @click="open = ! open" >Productos</button>
-
-    {% if not user.is_authenticated %}
-    <a class="hover:underline" href="{% url 'login' %}">Iniciar sesion</a>
-    {% comment %} <a class="hover:underline" href="{% url 'register' %}">Registrarte</a> {% endcomment %}
-    {% endif %}
     
     <a class="hover:underline flex flex-col items-center" href="{% url 'view_cart' %}">
       <div>
@@ -38,22 +34,8 @@
         carrito
       </p>
     </a>
+  
+    {% include "components/navbarItem.html" with text="Productos" items_list=categories login_required=False icon="shop.html" %}
+    {% include "components/navbarItem.html" with text="User"      items_list=links                           icon="user.html" %}
   </nav>
-  
-   <div 
-    class="text-blue-600 absolute z-10 bg-gray-200 w-screen h-[50vh]" 
-    @mouseover.away="open = false"
-    x-show="open" 
-    x-transition
-  >
-  {% for category in categories %}
-    <div class="hover:underline">
-      <a href="{% url 'category' category.name %}">
-        {{ category.name }} 
-      </a>
-    </div> 
-  
-  {% endfor %}
-  </div> 
-
 </div>

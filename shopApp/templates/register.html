@@ -1,24 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% comment %} <form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Enviar" />
-  </form> {% endcomment %}
   
-
-
-<div class="shadow-lg rounded-lg p-4 mt-12">
-    <h1 class="text-7xl font-bold">Registrarme</h1>
+<div class="p-4 mt-12">
+    <h1 class="text-5xl md:text-7xl font-bold">Registrarme</h1>
     <form method="post">
-        
         {% csrf_token %}
         {{ form }}
-        <input class="bg-gray-100 rounded-md p-2 w-32 hover:bg-gray-300 transition w-full" type="submit" value="Registrarme"/> 
-        
+        <input id="submit_button"class="w-full md:w-32 bg-gray-100 rounded-md p-2  hover:bg-gray-300 transition w-full" type="submit" value="Registrarme"/> 
+        <a href="{% url "login" %}" class="text-gray-500 text-sm font-bold hover:underline">Ya tienes una cuenta? Iniciar sesión</a>
     </form>
 </div>
-
 
 {% endblock %}

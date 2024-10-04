@@ -2,7 +2,7 @@
 
 {% block content %}
   {% include 'components/title.html' with category='Destacados' %}
-  <div class="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 px-2">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 px-2">
     {% for product in productos %}
       {% include 'components/product.html' %}
     {% endfor %}

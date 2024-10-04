@@ -4,3 +4,11 @@ __pycache__
 *.sqlite3
 env
 staticfiles/
+SQL/
+.env
+del.py
+chrome
+geckodriver
+.env
+*.png
+*.pdf

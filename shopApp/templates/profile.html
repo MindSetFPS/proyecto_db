@@ -1,12 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+  <div class="px-2">
     <h1 class="text-5xl font-bold">Perfil</h1>
-    <div> Correo: {{ profile.email }} </div>
-    <div> Nombre: {{ profile.name }} </div>
-    <div> Usuario: {{ profile.username }} </div>
-    <div> Apellido: {{ profile.lastname}} </div>
+    <div>Correo: {{ profile.email }}</div>
+    <div>Nombre: {{ profile.name }}</div>
+    <div>Usuario: {{ profile.username }}</div>
+    <div>Apellido: {{ profile.lastname }}</div>
     
-</div>
+    {% if order %}
+      {% include 'components/title.html' with category='Ultima compra' %}
+      {% include 'components/order.html' %}
+    {% endif %}
+    
+    {% if not order %}
+    
+      <h2>Aun no tienes pedidos</h2>
+    
+    {% endif %}
+    
+
+    {% if order %}
+      <div class="font-bold">
+        <a href="{% url 'order_history' %}">
+          Ver todo
+        </a>
+      </div>
+    {% endif %}
+
+    <h1>Mis direcciones</h1>
+    <h1>Mis metodos de pago</h1>
+    <h1>Servicio a cliente</h1>
+    <h1>Configurar mi cuenta</h1>
+  </div>
 {% endblock %}

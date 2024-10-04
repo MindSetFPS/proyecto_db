@@ -1,0 +1,18 @@
+<button 
+    type="{{ type }}"
+    id="{{ id }}"
+    class="
+        bg-{{ color }}-500 
+        hover:bg-{{ color }}-400 
+        p-2
+        rounded-lg 
+        text-white 
+        font-semibold 
+        w-{{ width }}
+        transition
+        text-{% firstof text_size "md" %}
+        {{ class }}
+    "
+>
+   {{ text }}
+</button>
