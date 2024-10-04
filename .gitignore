@@ -10,3 +10,5 @@ del.py
 chrome
 geckodriver
 .env
+*.png
+*.pdf
